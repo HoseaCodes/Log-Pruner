@@ -38,6 +38,7 @@ async function main() {
         // 604800 seconds = 7 days
         const deleteResult = await collection.createIndex( { "createdAt ": 1 }, { expireAfterSeconds: 604800 } )
         debug( `Deleted documents => '${ deleteResult }', collection = '${ collection }'` );
+        client.close();
         return 'done.';
     } catch (error) {
         core.setFailed(error.message);
@@ -45,6 +46,3 @@ async function main() {
 } 
 
 main()
-  .then(console.log)
-  .catch(console.error)
-  .finally(() => client.close())
