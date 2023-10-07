@@ -1,5 +1,4 @@
 const { setFailed, getInput, debug } = require( '@actions/core' );
-const github = require('@actions/github');
 const { MongoClient } = require('mongodb');
 
 
@@ -41,7 +40,7 @@ async function main() {
         client.close();
         return 'done.';
     } catch (error) {
-        core.setFailed(error.message);
+        setFailed(error.message);
     }
 } 
 
