@@ -3,7 +3,7 @@ const github = require('@actions/github');
 const { MongoClient } = require('mongodb');
 
 
-( async function main() {
+async function main() {
 	debug( 'Our action is running' );
 
     const mongodb_url = getInput( 'mongodb_url' );
@@ -42,8 +42,7 @@ const { MongoClient } = require('mongodb');
     } catch (error) {
         core.setFailed(error.message);
     }
-} )();
-
+} 
 
 main()
   .then(console.log)
