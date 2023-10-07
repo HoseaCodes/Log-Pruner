@@ -58176,10 +58176,8 @@ async function main() {
         return;
     }
 
-    console.log(`Pulling infomation from db ${db_name} - collection ${collection_name} `);
-
-    // const time = (new Date()).toTimeString();
-    // core.setOutput("time", time);
+    const time = new Date();
+    console.log(`Pulling infomation from db ${db_name} - collection ${collection_name} - time ${time.toLocaleString()} `);
 
     // const url = 'mongodb://localhost:27017';
     const client = new MongoClient(mongodb_url);
@@ -58188,13 +58186,17 @@ async function main() {
     try {
         // Use connect method to connect to the server
         await client.connect();
-        console.log('Connected successfully to server');
+        const connectionTime = new Date();
+        console.log(`Connected successfully to server...${(connectionTime - time).toLocaleString()}`);
         const db = client.db(db_name);
         const collection = db.collection(collection_name);
         // 604800 seconds = 7 days
         const deleteResult = await collection.createIndex( { "createdAt ": 1 }, { expireAfterSeconds: 604800 } )
         debug( `Deleted documents => '${ deleteResult }', collection = '${ collection }'` );
+        console.log( `Deleted documents => '${ deleteResult }', collection = '${ collection }'` );
         client.close();
+        const closeTime = new Date();
+        console.log(`Client connection is closed...${(closeTime - time).toLocaleString}`)
         return 'done.';
     } catch (error) {
         setFailed(error.message);
