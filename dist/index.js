@@ -65085,7 +65085,7 @@ const github = __nccwpck_require__(5438);
 const { MongoClient } = __nccwpck_require__(8821);
 
 
-( async function main() {
+async function main() {
 	debug( 'Our action is running' );
 
     const mongodb_url = getInput( 'mongodb_url' );
@@ -65120,17 +65120,15 @@ const { MongoClient } = __nccwpck_require__(8821);
         // 604800 seconds = 7 days
         const deleteResult = await collection.createIndex( { "createdAt ": 1 }, { expireAfterSeconds: 604800 } )
         debug( `Deleted documents => '${ deleteResult }', collection = '${ collection }'` );
+        client.close();
         return 'done.';
     } catch (error) {
         core.setFailed(error.message);
     }
-} )();
-
+} 
 
 main()
-  .then(console.log)
-  .catch(console.error)
-  .finally(() => client.close())
+
 })();
 
 module.exports = __webpack_exports__;
