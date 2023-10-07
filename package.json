@@ -1,0 +1,33 @@
+{
+  "name": "logprune",
+  "version": "1.0.0",
+  "author": "HoseaCodes",
+  "description": "",
+  "main": "dist/index.js",
+  "homepage": "https://github.com/HoseaCodes/Log-Pruner#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HoseaCodes/Log-Pruner.git"
+  },
+  "bugs": {
+   "url": "https://github.com/HoseaCodes/Log-Pruner/issues"
+  },
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "JavaScript"
+  ],  
+  "scripts": {
+    "build": "ncc build src/action.js -o dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^5.1.1",
+    "@vercel/ncc": "^0.38.0"
+  },
+  "dependencies": {
+    "mongodb": "^6.1.0"
+  }
+}
